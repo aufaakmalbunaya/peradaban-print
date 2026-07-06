@@ -4,7 +4,7 @@
   "trailingSlash": false,
   "headers": [
     {
-      "source": "/config.js",
+      "source": "/print/config.js",
       "headers": [{ "key": "Cache-Control", "value": "no-store" }]
     }
   ]
