@@ -1,0 +1,18 @@
+# Simpan di: /etc/systemd/system/peradaban-print.service
+# Aktifkan: sudo systemctl daemon-reload && sudo systemctl enable --now peradaban-print
+[Unit]
+Description=Peradaban Print worker (Epson L300 via CUPS)
+After=network-online.target cups.service
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=pi
+WorkingDirectory=/home/pi/peradaban-print
+EnvironmentFile=/home/pi/peradaban-print/.env
+ExecStart=/usr/bin/python3 /home/pi/peradaban-print/worker.py
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

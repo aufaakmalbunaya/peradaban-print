@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cek Status Cetakan — Peradaban Moyudan</title>
+<link rel="stylesheet" href="/print/assets/theme.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ctext y='20' font-size='20'%3E%F0%9F%96%A8%EF%B8%8F%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+<div id="nav"></div>
+<main class="wrap narrow section">
+  <span class="eyebrow">Lacak cetakan</span>
+  <h1 class="h1 mt8" style="font-size:32px">Cek status cetakan</h1>
+  <p class="lead" style="font-size:16px">Masukkan kode yang Anda terima saat mengirim permintaan.</p>
+
+  <div class="card pad mt24">
+    <div style="display:flex;gap:12px;flex-wrap:wrap">
+      <input type="text" id="code" placeholder="cth: ABC-D2X" style="flex:1;text-transform:uppercase;font-family:Menlo,Consolas,monospace;letter-spacing:.1em" maxlength="7">
+      <button class="btn blue" id="look">Lacak</button>
+    </div>
+  </div>
+
+  <div id="result" class="mt24"></div>
+</main>
+<div id="foot"></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="/print/config.js"></script>
+<script src="/print/assets/common.js"></script>
+<script src="/print/assets/status.js"></script>
+</body>
+</html>
