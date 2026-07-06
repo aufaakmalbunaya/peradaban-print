@@ -1,0 +1,5 @@
+# Rahasia Raspberry Pi — jangan pernah di-commit
+pi/.env
+*.env
+.DS_Store
+node_modules/

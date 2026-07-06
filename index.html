@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Peradaban Moyudan — Layanan Cetak Online</title>
+<meta name="description" content="Upload dokumen A4, minta izin, dan cetak otomatis dari mana saja. Layanan cetak mandiri berbasis web.">
+<link rel="stylesheet" href="/assets/theme.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ctext y='20' font-size='20'%3E%F0%9F%96%A8%EF%B8%8F%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+<div id="nav"></div>
+
+<header class="section">
+  <div class="wrap" style="display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center">
+    <div>
+      <span class="eyebrow">Cetak tanpa ribet</span>
+      <h1 class="h1 mt8">Kirim dokumen,<br>ambil hasilnya.</h1>
+      <p class="lead">Upload berkas PDF Anda, tunggu persetujuan, lalu dokumen dicetak otomatis di printer kami. Ukuran non-A4 otomatis disesuaikan. Tidak perlu kabel, tidak perlu antre.</p>
+      <div class="mt24" style="display:flex;gap:12px;flex-wrap:wrap">
+        <a class="btn blue" href="/print">Mulai Cetak &rarr;</a>
+        <a class="btn ghost" href="/status">Cek Status Cetakan</a>
+      </div>
+      <div class="mt24" style="display:flex;gap:20px;flex-wrap:wrap">
+        <span class="badge green"><span class="dot"></span>Printer aktif</span>
+        <span class="hint">Gratis · Hanya A4 · Perlu persetujuan</span>
+      </div>
+    </div>
+    <div>
+      <div class="card pad" style="transform:rotate(1.2deg)">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <span class="badge blue"><span class="dot"></span>A4</span>
+          <span class="hint mono">TUGAS-042</span>
+        </div>
+        <div style="height:150px;border-radius:0;background:repeating-linear-gradient(0deg,var(--soft),var(--soft) 14px,var(--soft-2) 14px,var(--soft-2) 16px);margin:16px 0;border:1px solid var(--border)"></div>
+        <div class="filechip"><span class="fi" id="h-fi"></span><div class="meta"><b>proposal-kegiatan.pdf</b><span class="hint">3 halaman · A4 · 480 KB</span></div><span class="badge green"><span class="dot"></span>Selesai</span></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="section" style="background:var(--bg-2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
+  <div class="wrap center">
+    <span class="eyebrow">Cara kerja</span>
+    <h2 class="h1 mt8" style="font-size:30px">Empat langkah, selesai</h2>
+  </div>
+  <div class="wrap mt32" style="display:grid;grid-template-columns:repeat(4,1fr);gap:20px" id="steps"></div>
+</section>
+
+<section class="section">
+  <div class="wrap" style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px" id="feats"></div>
+</section>
+
+<div id="foot"></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="/config.js"></script>
+<script src="/assets/common.js"></script>
+<script>
+document.getElementById('nav').innerHTML = navHTML('home');
+document.getElementById('foot').innerHTML = footerHTML();
+document.getElementById('h-fi').innerHTML = ICON.file(20);
+const steps = [
+  ['1','Upload berkas','Pilih file PDF dari HP atau laptop.', ICON.upload(22)],
+  ['2','Minta izin','Kami cek dulu ketersediaan kertas sebelum menyetujui.', ICON.lock(22)],
+  ['3','Cetak otomatis','Setelah disetujui, dokumen langsung dicetak.', ICON.printer(22)],
+  ['4','Ambil hasil','Pantau status lewat kode unik, lalu ambil cetakan.', ICON.check(22)]
+];
+document.getElementById('steps').innerHTML = steps.map(s=>`
+  <div class="card pad" style="text-align:left">
+    <div style="display:flex;align-items:center;justify-content:space-between">
+      <span style="width:40px;height:40px;border-radius:0;background:var(--blue-soft);color:var(--blue);display:grid;place-items:center">${s[3]}</span>
+      <span class="mono muted" style="font-size:26px;font-weight:700;opacity:.25">${s[0]}</span>
+    </div>
+    <h3 style="margin-top:14px;font-size:17px">${s[1]}</h3>
+    <p class="hint mt8">${s[2]}</p>
+  </div>`).join('');
+const feats = [
+  [ICON.paper(20),'Selalu A4','Dokumen yang bukan A4 otomatis disesuaikan ke ukuran A4 saat dicetak.'],
+  [ICON.lock(20),'Persetujuan dulu','Setiap permintaan ditinjau pemilik untuk memastikan stok kertas cukup.'],
+  [ICON.bolt(20),'Real-time','Status cetakan Anda diperbarui langsung: menunggu, dicetak, selesai.']
+];
+document.getElementById('feats').innerHTML = feats.map(f=>`
+  <div class="card pad">
+    <span style="width:44px;height:44px;border-radius:0;background:var(--accent-soft);border:1px solid var(--border);display:grid;place-items:center;color:var(--lav)">${f[0]}</span>
+    <h3 style="margin-top:14px;font-size:18px">${f[1]}</h3>
+    <p class="hint mt8">${f[2]}</p>
+  </div>`).join('');
+</script>
+</body>
+</html>

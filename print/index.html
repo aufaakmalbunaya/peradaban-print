@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cetak Dokumen — Peradaban Moyudan</title>
+<link rel="stylesheet" href="/assets/theme.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ctext y='20' font-size='20'%3E%F0%9F%96%A8%EF%B8%8F%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+<div id="nav"></div>
+
+<main class="wrap narrow section">
+  <!-- FORM -->
+  <div id="form-view">
+    <span class="eyebrow">Permintaan cetak</span>
+    <h1 class="h1 mt8" style="font-size:32px">Cetak dokumen Anda</h1>
+    <p class="lead" style="font-size:16px">Upload PDF apa saja — ukuran non-A4 otomatis disesuaikan ke A4. Permintaan kami tinjau dulu sebelum dicetak.</p>
+
+    <div class="card pad mt24">
+      <input type="file" id="file" accept="application/pdf" class="hide">
+      <div class="drop" id="drop">
+        <div class="ico" id="drop-ico"></div>
+        <b>Klik untuk pilih file, atau seret ke sini</b>
+        <div class="hint mt8">Hanya PDF · otomatis jadi A4 · maks <span id="lim-mb"></span>MB / <span id="lim-pg"></span> halaman</div>
+      </div>
+
+      <div id="filebox" class="hide mt16"></div>
+
+      <div class="grid2 mt24">
+        <div class="field" style="margin:0">
+          <label class="fl">Nama Anda</label>
+          <input type="text" id="nm" placeholder="cth: Budi Santoso" autocomplete="name">
+        </div>
+        <div class="field" style="margin:0">
+          <label class="fl">No. WhatsApp</label>
+          <input type="text" id="wa" placeholder="cth: 0812xxxxxxx" inputmode="numeric">
+        </div>
+      </div>
+      <div class="grid2 mt16">
+        <div class="field" style="margin:0">
+          <label class="fl">Jumlah rangkap</label>
+          <select id="cp"></select>
+        </div>
+        <div class="field" style="margin:0">
+          <label class="fl">Catatan <span class="muted">(opsional)</span></label>
+          <input type="text" id="nt" placeholder="cth: tolong cetak hitam-putih">
+        </div>
+      </div>
+
+      <button class="btn blue block mt24" id="send" disabled>Kirim permintaan cetak</button>
+      <p class="hint center mt16">Dengan mengirim, Anda setuju cetakan dilakukan setelah disetujui pemilik.</p>
+    </div>
+  </div>
+
+  <!-- SUCCESS -->
+  <div id="ok-view" class="hide">
+    <div class="card pad center">
+      <div style="width:64px;height:64px;border-radius:0;background:var(--green-soft);border:1px solid var(--green);color:var(--green);display:grid;place-items:center;margin:0 auto" id="ok-ico"></div>
+      <h1 class="h1 mt16" style="font-size:26px">Permintaan terkirim!</h1>
+      <p class="lead" style="font-size:16px">Simpan kode ini untuk memantau status cetakan Anda.</p>
+      <div class="mt16"><span class="code-pill" id="ok-code">—</span></div>
+      <p class="hint mt16">Kami akan meninjau ketersediaan kertas lalu menyetujui atau menolak permintaan.</p>
+      <div class="mt24" style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+        <a class="btn blue" id="ok-track">Pantau status &rarr;</a>
+        <button class="btn ghost" onclick="location.reload()">Cetak lagi</button>
+      </div>
+    </div>
+  </div>
+</main>
+
+<div id="foot"></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+<script src="/config.js"></script>
+<script src="/assets/common.js"></script>
+<script src="/assets/print.js"></script>
+</body>
+</html>
