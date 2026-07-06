@@ -4,8 +4,8 @@
 // ============================================================
 window.APP_CONFIG = {
   // Dari Supabase > Project Settings > API
-  SUPABASE_URL: "",              // contoh: https://xxxxx.supabase.co
-  SUPABASE_ANON_KEY: "",        // anon public key
+  SUPABASE_URL: "https://ykkngtxsqmbzaswylywv.supabase.co",              // contoh: https://xxxxx.supabase.co
+  SUPABASE_ANON_KEY: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inlra25ndHhzcW1iemFzd3lseXd2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODMyOTAwMDcsImV4cCI6MjA5ODg2NjAwN30.No1q9ljdDgzqaJdo_Ss7DiogvrGrJmL1Jj7uCL3kfFM",        // anon public key
 
   // Nama bucket Storage (buat sesuai schema.sql)
   BUCKET: "print-files",

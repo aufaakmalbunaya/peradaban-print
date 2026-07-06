@@ -69,6 +69,7 @@ async function submit(){
   const code = genCode();
   const copies = parseInt($('#cp').value,10);
   const note = $('#nt').value.trim();
+  const color = $('#cm').value; // 'mono' | 'color'
 
   try{
     if (window.DEMO){
@@ -82,7 +83,7 @@ async function submit(){
     const ins = await sb.from('print_jobs').insert({
       id, tracking_code: code, requester_name: name, contact: wa,
       file_name: current.file.name, file_path: path, pages: current.pages,
-      copies, note, status: 'pending'
+      copies, color_mode: color, note, status: 'pending'
     });
     if (ins.error) throw ins.error;
     success(code);

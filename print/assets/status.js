@@ -19,7 +19,7 @@ async function lookup(){
   try{
     if (window.DEMO){
       await new Promise(r=>setTimeout(r,500));
-      job = { tracking_code:code, requester_name:'Contoh Pengguna', file_name:'dokumen-a4.pdf', pages:3, copies:1, status:'printing', note:'', created_at:new Date(Date.now()-3600e3).toISOString(), updated_at:new Date().toISOString() };
+      job = { tracking_code:code, requester_name:'Contoh Pengguna', file_name:'dokumen-a4.pdf', pages:3, copies:1, color_mode:'mono', status:'printing', note:'', created_at:new Date(Date.now()-3600e3).toISOString(), updated_at:new Date().toISOString() };
     } else {
       const { data, error } = await sb.rpc('get_job_status', { p_code: code });
       if (error) throw error;
@@ -56,7 +56,7 @@ function render(job, code){
     </div>
     <div class="filechip mt24">
       <span class="fi">${ICON.file(20)}</span>
-      <div class="meta"><b>${esc(job.file_name)}</b><span class="hint">${job.pages} halaman · ${job.copies} rangkap · A4</span></div>
+      <div class="meta"><b>${esc(job.file_name)}</b><span class="hint">${job.pages} halaman · ${job.copies} rangkap · ${job.color_mode==='color'?'Warna':'Hitam-putih'} · A4</span></div>
     </div>
     <hr style="border:none;border-top:1px solid var(--border);margin:24px 0">
     <ul class="tl">${tl}</ul>

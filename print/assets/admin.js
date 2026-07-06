@@ -8,7 +8,7 @@ let JOBS = [];
 const DEMO_JOBS = [
   { id:'1', tracking_code:'ABC-D2X', requester_name:'Budi Santoso', contact:'0812xxxx1', file_name:'proposal-kegiatan.pdf', pages:5, copies:2, note:'Hitam putih ya', status:'pending', created_at:new Date(Date.now()-6*60e3).toISOString(), updated_at:new Date(Date.now()-6*60e3).toISOString() },
   { id:'2', tracking_code:'KLM-7YZ', requester_name:'Siti Aminah', contact:'0813xxxx2', file_name:'tugas-akhir.pdf', pages:12, copies:1, note:'', status:'pending', created_at:new Date(Date.now()-22*60e3).toISOString(), updated_at:new Date(Date.now()-22*60e3).toISOString() },
-  { id:'3', tracking_code:'QRS-9AB', requester_name:'Andi Wijaya', contact:'0857xxxx3', file_name:'undangan.pdf', pages:1, copies:3, note:'', status:'printing', created_at:new Date(Date.now()-40*60e3).toISOString(), updated_at:new Date(Date.now()-2*60e3).toISOString() },
+  { id:'3', tracking_code:'QRS-9AB', requester_name:'Andi Wijaya', contact:'0857xxxx3', file_name:'undangan.pdf', pages:1, copies:3, color_mode:'color', note:'', status:'printing', created_at:new Date(Date.now()-40*60e3).toISOString(), updated_at:new Date(Date.now()-2*60e3).toISOString() },
   { id:'4', tracking_code:'TUV-3CD', requester_name:'Rina Melati', contact:'0821xxxx4', file_name:'laporan.pdf', pages:8, copies:1, note:'', status:'done', created_at:new Date(Date.now()-3*3600e3).toISOString(), updated_at:new Date(Date.now()-2.5*3600e3).toISOString() },
   { id:'5', tracking_code:'WXY-6EF', requester_name:'Joko Prasetyo', contact:'0838xxxx5', file_name:'brosur-a3.pdf', pages:2, copies:1, note:'Kertas habis', status:'rejected', created_at:new Date(Date.now()-5*3600e3).toISOString(), updated_at:new Date(Date.now()-4.5*3600e3).toISOString() }
 ];
@@ -78,7 +78,7 @@ function rowHTML(j){
     <td><span class="mono" style="font-weight:600">${esc(j.tracking_code)}</span></td>
     <td><b>${esc(j.requester_name)}</b><br><span class="hint">${esc(j.contact)}</span></td>
     <td>${esc(j.file_name)}${j.note?`<br><span class="hint">“${esc(j.note)}”</span>`:''}</td>
-    <td class="hint">${j.pages} hlm · ${j.copies}×<br>A4</td>
+    <td class="hint">${j.pages} hlm · ${j.copies}×<br><span class="mono">${j.color_mode==='color'?'WARNA':'B/W'}</span> · A4</td>
     <td><span class="badge ${st.badge}"><span class="dot"></span>${st.label}</span></td>
     <td class="hint">${timeAgo(j.created_at)}</td>
     <td style="white-space:nowrap;text-align:right">${dl} ${actions}</td>

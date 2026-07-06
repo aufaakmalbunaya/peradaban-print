@@ -43,9 +43,16 @@
           <select id="cp"></select>
         </div>
         <div class="field" style="margin:0">
-          <label class="fl">Catatan <span class="muted">(opsional)</span></label>
-          <input type="text" id="nt" placeholder="cth: tolong cetak hitam-putih">
+          <label class="fl">Jenis cetak</label>
+          <select id="cm">
+            <option value="mono">Hitam-putih (hemat)</option>
+            <option value="color">Warna</option>
+          </select>
         </div>
+      </div>
+      <div class="field mt16">
+        <label class="fl">Catatan <span class="muted">(opsional)</span></label>
+        <input type="text" id="nt" placeholder="cth: cetak bolak-balik / 2 sisi">
       </div>
 
       <button class="btn blue block mt24" id="send" disabled>Kirim permintaan cetak</button>

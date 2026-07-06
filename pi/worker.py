@@ -7,7 +7,7 @@ Alur:
   2. Klaim job (set 'printing') agar tidak dobel.
   3. Unduh PDF via signed URL (service_role bypass RLS).
   4. Paksa semua halaman ke ukuran A4 (Ghostscript) sebelum cetak.
-  5. Cetak ke Epson L300 lewat CUPS (lp), lalu set 'done' / 'failed'.
+  5. Cetak ke Epson L300 lewat CUPS (lp) sesuai mode warna/hitam-putih, lalu set 'done' / 'failed'.
 
 Jalankan sebagai service systemd (lihat peradaban-print.service).
 Hanya butuh koneksi internet keluar — tidak perlu IP publik / port forwarding.
@@ -75,9 +75,11 @@ def force_a4(src, dst):
     res = subprocess.run(cmd, capture_output=True, text=True)
     return res.returncode == 0 and os.path.exists(dst)
 
-def print_pdf(path, copies):
+def print_pdf(path, copies, color_mode="mono"):
+    color_opt = "color" if color_mode == "color" else "monochrome"
     cmd = ["lp", "-d", PRINTER, "-n", str(copies),
-           "-o", "media=A4", "-o", "fit-to-page", "-o", "sides=one-sided", path]
+           "-o", "media=A4", "-o", "fit-to-page", "-o", "sides=one-sided",
+           "-o", f"print-color-mode={color_opt}", path]
     res = subprocess.run(cmd, capture_output=True, text=True)
     if res.returncode != 0:
         raise RuntimeError(res.stderr.strip() or "lp gagal")
@@ -95,7 +97,9 @@ def handle(job):
             target = pdf  # fallback: andalkan fit-to-page dari CUPS
             print("  ! normalisasi gagal, pakai fit-to-page")
         try:
-            print_pdf(target, int(job.get("copies", 1)))
+            mode = job.get("color_mode", "mono")
+            print(f"  → mode cetak: {'warna' if mode == 'color' else 'hitam-putih'}")
+            print_pdf(target, int(job.get("copies", 1)), mode)
             set_status(job["id"], "done")
             print("  ✓ selesai dicetak")
         except Exception as e:

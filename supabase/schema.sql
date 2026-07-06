@@ -13,6 +13,7 @@ create table if not exists public.print_jobs (
   file_path      text not null,
   pages          int  not null default 1,
   copies         int  not null default 1 check (copies between 1 and 20),
+  color_mode     text not null default 'mono' check (color_mode in ('mono','color')),
   note           text default '',
   status         text not null default 'pending'
                  check (status in ('pending','approved','printing','done','rejected','failed')),
@@ -21,6 +22,8 @@ create table if not exists public.print_jobs (
 );
 create index if not exists print_jobs_status_idx on public.print_jobs(status);
 create index if not exists print_jobs_code_idx   on public.print_jobs(tracking_code);
+-- Jika tabel sudah pernah dibuat tanpa kolom warna, jalankan sekali:
+--   alter table public.print_jobs add column if not exists color_mode text not null default 'mono' check (color_mode in ('mono','color'));
 
 -- auto-update updated_at
 create or replace function public.touch_updated_at() returns trigger as $$
@@ -53,10 +56,10 @@ create policy admin_all on public.print_jobs
 create or replace function public.get_job_status(p_code text)
 returns table (
   tracking_code text, requester_name text, file_name text,
-  pages int, copies int, status text, note text,
+  pages int, copies int, color_mode text, status text, note text,
   created_at timestamptz, updated_at timestamptz
 ) language sql security definer set search_path = public as $$
-  select tracking_code, requester_name, file_name, pages, copies, status, note, created_at, updated_at
+  select tracking_code, requester_name, file_name, pages, copies, color_mode, status, note, created_at, updated_at
   from public.print_jobs where tracking_code = upper(p_code) limit 1;
 $$;
 grant execute on function public.get_job_status(text) to anon, authenticated;
